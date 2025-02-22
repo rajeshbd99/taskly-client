@@ -4,7 +4,6 @@ import Navbar from "../components/ui/Navbar";
 import { Outlet } from "react-router-dom";
 
 function MainLayout() {
-  // xl:max-w-[1100px] 2xl:max-w-[1400px] px-5 md:px-0 mx-auto
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
 
   useEffect(() => {

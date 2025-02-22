@@ -102,7 +102,7 @@ const TaskItem = ({ task, user, setTasks }) => {
               </div>
             </div>
           </div>,
-          document.body // Render outside the TaskItem component
+          document.body
         )}
     </>
   );

@@ -76,7 +76,7 @@ const Register = () => {
         };
         axiosPublic.post("/user/add-user-data", userInfo).then((res) => {
           if (res.data.insertedId) {
-            reset(); // Reset form data
+            reset();
             toast.success("User registered successfully!");
             navigate(from, { replace: true });
           }
@@ -248,13 +248,6 @@ const Register = () => {
             Log in
           </Link>
         </p>
-
-        {/* <div className="flex items-center justify-center">
-          <Link to="/" className="text-blue-500 hover:underline">
-            Back to Home
-          </Link>
-        </div> */}
-
         {errors && <p className="text-sm text-red-500">{errors.message}</p>}
       </div>
     </div>

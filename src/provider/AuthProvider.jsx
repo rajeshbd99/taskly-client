@@ -38,7 +38,6 @@ function AuthProvider({ children }) {
         setUser(currentUser);
         if (currentUser?.email) {
           const user = { email: currentUser.email };
-
           axios
             .post(`${import.meta.env.VITE_API_URL}/auth/jwt-auth`, user, {
               withCredentials: true,
@@ -46,8 +45,6 @@ function AuthProvider({ children }) {
             .then((response) => {})
             .catch((error) => {
               toast.success("user authenticated failed!");
-
-              // console.log(error);
             });
         }
       } else {
@@ -90,21 +87,6 @@ function AuthProvider({ children }) {
       setLoading(false);
     }
   };
-
-  // const logoutUser = () => {
-  //   setLoading(true);
-  //   axios
-  //     .post(`${link}/logout`, {}, { withCredentials: true })
-  //     .then((response) => {
-  //       toast.success("Logged out successfully!");
-  //       // console.log(response);
-  //     })
-  //     .catch((error) => {
-  //       toast.error("An error occurred during logout.");
-  //       // console.log(error);
-  //     });
-  //   return signOut(auth);
-  // };
 
   const googleSignIn = () => {
     setLoading(true);

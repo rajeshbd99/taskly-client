@@ -41,11 +41,8 @@ const Login = () => {
     }
     return true;
   };
-  //------------------------------------
 
   const onSubmit = async (data) => {
-    // e.preventDefault();
-    // validate captcha
     if (!handleValidateCaptcha()) {
       return;
     }
@@ -144,11 +141,6 @@ const Login = () => {
                   value: 20,
                   message: "Password cannot exceed 20 characters",
                 },
-                // pattern: {
-                //   value: /^(?=.*[a-z])(?=.*[A-Z])[a-zA-Z]{6,}$/,
-                //   message:
-                //     "must contain one uppercase and lowercase letter",
-                // },
               })}
               placeholder="Enter your password"
               className="w-full px-4 py-2 mt-1 text-sm border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 text-gray-700"
@@ -201,19 +193,6 @@ const Login = () => {
               Register here
             </Link>
           </p>
-          {/* <p className="text-sm text-center text-gray-600">
-            Forgot Password?{" "}
-            <Link
-              to="/forgot-password"
-              state={{ email: formData.email }}
-              className="text-blue-500 hover:underline"
-            >
-              Click to Reset
-            </Link>
-          </p> */}
-          {/* <Link to="/" className="text-blue-500 hover:underline">
-            Back to Home
-          </Link> */}
         </div>
       </div>
     </div>

@@ -20,7 +20,7 @@ const EditTaskModal = ({ setRefetchTodo }) => {
       reset({
         title: taskDetails.title,
         description: taskDetails.description,
-        category: taskDetails.status, // Ensure the field name matches the form field
+        category: taskDetails.status,
       });
     }
   }, [taskDetails, reset]);

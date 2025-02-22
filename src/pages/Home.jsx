@@ -34,7 +34,7 @@ const Home = () => {
     if (!over) return;
 
     const taskId = active.id;
-    const newStatus = over.id; // The new status column
+    const newStatus = over.id;
 
     // Find and update the task
     let movedTask = null;
