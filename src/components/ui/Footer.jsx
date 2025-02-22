@@ -1,58 +1,45 @@
-import { FaFacebook, FaLinkedin, FaSquareXTwitter } from "react-icons/fa6";
+import { FaFacebook, FaLinkedin, FaSquareXTwitter, FaInstagram } from "react-icons/fa6";
 
 function Footer() {
   return (
-    <div className="bg-indigo-300 text-yellow-100 p-10 flex flex-col items-center">
-      <footer className="footer flex lg:flex-row flex-col items-start justify-center gap-x-72">
-        <aside className="flex sm:flex-row flex-col sm:gap-x-4 sm:items-center">
-          <div>
-            <h2 className="text-3xl font-semibold">Taskly</h2>
-            <p>A Task management platform</p>
+    <div className="bg-indigo-800 text-yellow-100 py-6 px-6 flex flex-col items-center">
+      <footer className="footer flex flex-wrap justify-between items-center w-full max-w-7xl">
+        <div className="flex flex-col items-start max-w-xs">
+          <h2 className="text-3xl font-bold">Taskly</h2>
+          <p className="mt-2 text-sm">
+            Simplify your tasks and boost productivity with Taskly - your trusted task management platform.
+          </p>
+        </div>
+
+        <div className="flex flex-col items-start">
+          <h6 className="text-lg font-semibold mb-2">Contact Us</h6>
+          <a className="link link-hover">support@tasklyapp.com</a>
+          <a className="link link-hover">+1 (555) 123-4567</a>
+          <a className="link link-hover">San Francisco, CA, USA</a>
+        </div>
+
+        <div className="flex flex-col items-start">
+          <h6 className="text-lg font-semibold mb-2">Follow Us</h6>
+          <div className="flex gap-4">
+            <a href="https://linkedin.com/" target="_blank" className="link link-hover flex items-center gap-2">
+              <FaLinkedin size={20} /> LinkedIn
+            </a>
+            <a href="https://x.com/" target="_blank" className="link link-hover flex items-center gap-2">
+              <FaSquareXTwitter size={20} /> Twitter
+            </a>
+            <a href="https://facebook.com/" target="_blank" className="link link-hover flex items-center gap-2">
+              <FaFacebook size={20} /> Facebook
+            </a>
+            <a href="https://instagram.com/" target="_blank" className="link link-hover flex items-center gap-2">
+              <FaInstagram size={20} /> Instagram
+            </a>
           </div>
-        </aside>
-        <nav>
-          <h6 className="footer-title">Contact Information</h6>
-          <a className="link link-hover">paroimethu@gmail.com</a>
-          <a className="link link-hover">+880 1742828044</a>
-          <a className="link link-hover">Dhaka, Bangladesh</a>
-        </nav>
-        <nav>
-          <h6 className="footer-title">Get in touch</h6>
-          <a
-            href="https://www.linkedin.com/in/methu-p-6aa311204/"
-            target="_blank"
-            className="link link-hover"
-          >
-            <div className="flex gap-x-4 font-medium">
-              <FaLinkedin />
-              Linked In
-            </div>
-          </a>
-          <a
-            href="https://x.com/methu_paroi"
-            target="_blank"
-            className="link link-hover"
-          >
-            <div className="flex gap-x-4 font-medium">
-              <FaSquareXTwitter />
-              Twitter
-            </div>
-          </a>
-          <a
-            href="https://www.facebook.com/methu.paroi.1/"
-            target="_blank"
-            className="link link-hover"
-          >
-            <div className="flex gap-x-4 font-medium">
-              <FaFacebook />
-              Facebook
-            </div>
-          </a>
-        </nav>
+        </div>
       </footer>
-      <div className="mt-4 ">
-        <hr className="w-[90vw] h-2" />
-        <p className="text-center text-yellow-100">
+
+      <div className="mt-4 w-full max-w-7xl">
+        <hr className="border-yellow-100/30" />
+        <p className="text-center mt-2 text-sm">
           &copy; 2025 Taskly. All rights reserved.
         </p>
       </div>
