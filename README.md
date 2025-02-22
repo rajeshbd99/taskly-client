@@ -16,15 +16,15 @@ Taskly is a Task Management Application where users can add, edit, delete, and r
 
 ## 🛠 Installation Steps
 1. Clone the repository:
-   git clone https://github.com/yourusername/taskly-client.git
-   cd taskly-client
+  - git clone https://github.com/rajeshbd99/taskly-client
+  - cd taskly-client
 2. Install the dependencies:
-    npm install
+  - npm install
 3. Create a .env file for environment variables:
-    VITE_API_URL=http://localhost:3000
-    VITE_FIREBASE_API_KEY=your-firebase-api-key
+  - VITE_API_URL=http://localhost:3000
+  - VITE_FIREBASE_API_KEY=your-firebase-api-key
 4. Start the development server:
-    npm run dev
+  - npm run dev
 
 ## ⚙️ Technologies Used
 - React.js
