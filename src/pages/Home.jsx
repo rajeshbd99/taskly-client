@@ -86,7 +86,7 @@ const Home = () => {
   return (
     <div>
       <Helmet>
-        <title>TaskHandler</title>
+        <title>Taskly</title>
       </Helmet>
 
       <DndContext onDragEnd={handleDragEnd}>

@@ -7,7 +7,7 @@ function Footer() {
         <aside className="flex sm:flex-row flex-col sm:gap-x-4 sm:items-center">
           {/* <img className="w-32 h-32" src={logo} alt="" /> */}
           <div>
-            <h2 className="text-3xl font-semibold">TaskHandler</h2>
+            <h2 className="text-3xl font-semibold">Taskly</h2>
             <p>A Task management platform</p>
           </div>
         </aside>
@@ -54,7 +54,7 @@ function Footer() {
       <div className="mt-4 ">
         <hr className="w-[90vw] h-2" />
         <p className="text-center text-yellow-100">
-          &copy; 2025 TaskHandler. All rights reserved.
+          &copy; 2025 Taskly. All rights reserved.
         </p>
       </div>
     </div>
