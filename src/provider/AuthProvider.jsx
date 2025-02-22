@@ -16,6 +16,7 @@ export const AuthContext = createContext(null);
 const googleProvider = new GoogleAuthProvider();
 
 function AuthProvider({ children }) {
+  const [taskDetails, setTaskDetails] = useState([]);
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [filteredMovies, setFilteredMovies] = useState([]);
@@ -117,6 +118,8 @@ function AuthProvider({ children }) {
   const authInfo = {
     user,
     loading,
+    taskDetails,
+    setTaskDetails,
     filteredMovies,
     setFilteredMovies,
     createUser,
