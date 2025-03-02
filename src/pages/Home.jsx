@@ -1,6 +1,13 @@
 import { Helmet } from "react-helmet-async";
 import { useContext, useState, useEffect } from "react";
-import { DndContext } from "@dnd-kit/core";
+import {
+  DndContext,
+  closestCorners,
+  PointerSensor,
+  TouchSensor,
+  useSensor,
+  useSensors,
+} from "@dnd-kit/core";
 import DroppableSection from "../components/home/DroppableSection";
 import useAxiosPublic from "../hooks/useAxiosPublic";
 import { AuthContext } from "../provider/AuthProvider";
@@ -21,13 +28,18 @@ const Home = () => {
       axiosPublic.get(`/user/get-task/${user.email}`).then((response) => {
         const tasks = response.data;
         setTodoTask(tasks.filter((task) => task.status === "to-do"));
-        setInProgressTask(
-          tasks.filter((task) => task.status === "in-progress")
-        );
+        setInProgressTask(tasks.filter((task) => task.status === "in-progress"));
         setDoneTask(tasks.filter((task) => task.status === "done"));
       });
     }
   }, [user?.email, axiosPublic, refetchTodo]);
+
+  const sensors = useSensors(
+    useSensor(PointerSensor, { activationConstraint: { distance: 5 } }),
+    useSensor(TouchSensor, {
+      activationConstraint: { delay: 300, tolerance: 5 },
+    })
+  );
 
   const handleDragEnd = async (event) => {
     const { active, over } = event;
@@ -84,13 +96,21 @@ const Home = () => {
   };
 
   return (
-    <div>
+    <div className="bg-[#121212] text-gray-300 min-h-screen p-6">
       <Helmet>
-        <title>Taskly</title>
+        <title>TaskHandler</title>
       </Helmet>
 
-      <DndContext onDragEnd={handleDragEnd}>
-        <div className="grid grid-cols-1 lg:grid-cols-3 justify-items-center gap-4">
+      <h1 className="text-4xl font-bold text-center mb-6 text-[#FFD700]">
+        Task Management Board
+      </h1>
+
+      <DndContext
+        sensors={sensors}
+        collisionDetection={closestCorners}
+        onDragEnd={handleDragEnd}
+      >
+        <div className="grid grid-cols-1 lg:grid-cols-3 justify-items-center gap-6">
           <DroppableSection
             setRefetchTodo={setRefetchTodo}
             id="to-do"
@@ -112,9 +132,9 @@ const Home = () => {
         </div>
       </DndContext>
 
-      {/* add task modal */}
+      {/* Add Task Modal */}
       <AddTaskModal setRefetchTodo={setRefetchTodo} />
-      {/* edit task modal */}
+      {/* Edit Task Modal */}
       <EditTaskModal setRefetchTodo={setRefetchTodo} />
     </div>
   );

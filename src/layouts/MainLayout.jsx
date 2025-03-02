@@ -4,7 +4,7 @@ import Navbar from "../components/ui/Navbar";
 import { Outlet } from "react-router-dom";
 
 function MainLayout() {
-  const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "dark");
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
@@ -21,11 +21,20 @@ function MainLayout() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col justify-between font-poppins overflow-x-hidden">
+    <div
+      className={`min-h-[100dvh] flex flex-col font-poppins overflow-x-hidden transition-colors duration-300 ${
+        theme === "dark" ? "bg-[#121212] text-gray-300" : "bg-[#121212] text-gray-800"
+      }`}
+    >
+      {/* Navbar */}
       <Navbar toggleTheme={toggleTheme} currentTheme={theme} />
-      <div className="max-w-[1300px] container mx-auto">
+
+      {/* Main Content */}
+      <div className="flex-1 w-full max-w-[1300px] mx-auto px-4 py-4 md:py-6">
         <Outlet />
       </div>
+
+      {/* Footer */}
       <Footer />
     </div>
   );

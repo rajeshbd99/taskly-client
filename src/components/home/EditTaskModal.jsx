@@ -3,6 +3,8 @@ import useAxiosPublic from "../../hooks/useAxiosPublic";
 import { AuthContext } from "../../provider/AuthProvider";
 import { useContext, useEffect } from "react";
 import { toast } from "react-toastify";
+import { motion } from "framer-motion";
+import { FaEdit, FaTimesCircle } from "react-icons/fa";
 
 const EditTaskModal = ({ setRefetchTodo }) => {
   const axiosPublic = useAxiosPublic();
@@ -14,8 +16,8 @@ const EditTaskModal = ({ setRefetchTodo }) => {
     reset,
   } = useForm();
 
+  // Load task details into the form
   useEffect(() => {
-    console.log(taskDetails);
     if (taskDetails) {
       reset({
         title: taskDetails.title,
@@ -25,7 +27,7 @@ const EditTaskModal = ({ setRefetchTodo }) => {
     }
   }, [taskDetails, reset]);
 
-  //submit form data
+  // Handle form submission
   const onSubmit = async (data) => {
     try {
       await axiosPublic.patch(
@@ -36,120 +38,133 @@ const EditTaskModal = ({ setRefetchTodo }) => {
           status: data.category,
         }
       );
-      //close modal
       document.getElementById("EditTaskModal").close();
-      toast.success("Task edited successfully!");
+      toast.success("Task updated successfully!");
       setRefetchTodo((prev) => !prev);
     } catch (error) {
       document.getElementById("EditTaskModal").close();
-      toast.error("Error editing task");
+      toast.error("Error updating task");
     }
   };
 
   return (
     <dialog id="EditTaskModal" className="modal">
-      <div className="modal-box">
+      <motion.div
+        className="modal-box max-w-3xl w-full p-6 bg-gradient-to-br from-[#1E293B] to-[#374151] shadow-2xl rounded-2xl border border-gray-700"
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        exit={{ opacity: 0, scale: 0.8 }}
+        transition={{ duration: 0.3 }}
+      >
+        {/* Close button */}
         <form method="dialog">
-          {/* if there is a button in form, it will close the modal */}
-          <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
-            ✕
+          <button
+            className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+          >
+            <FaTimesCircle
+              size={24}
+              className="text-red-500 hover:text-red-600 transition duration-200"
+            />
           </button>
         </form>
+
+        {/* Header */}
+        <motion.h1
+          className="text-3xl font-semibold text-[#60A5FA] mb-6 flex items-center gap-3"
+          initial={{ x: -50, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ delay: 0.1 }}
+        >
+          <FaEdit /> Edit Task
+        </motion.h1>
+
+        {/* Form */}
         <form
-          className="flex flex-col items-center justify-center gap-y-4 "
+          className="flex flex-col items-center justify-center gap-y-6"
           onSubmit={handleSubmit(onSubmit)}
         >
-          <h1 className="text-2xl font-semibold text-indigo-800">Edit Task</h1>
-          {/* title input */}
-          <div className="relative mb-8 w-[80%]">
-            <label
-              htmlFor="title"
-              className="block text-sm font-medium text-gray-600"
-            >
+          {/* Task Title */}
+          <motion.div
+            className="relative w-full max-w-2xl"
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.2 }}
+          >
+            <label className="block text-sm font-medium text-gray-300">
               Task Title
             </label>
             <input
               type="text"
               {...register("title", {
-                required: "title is required",
-                maxLength: {
-                  value: 50,
-                  message: "Title cannot exceed 50 characters",
-                },
+                required: "Title is required",
+                maxLength: { value: 50, message: "Title cannot exceed 50 characters" },
               })}
-              aria-invalid={errors.title ? "true" : "false"}
               placeholder="Enter task title"
-              className="w-full px-4 py-2 mt-1 text-sm border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 text-gray-700"
+              className="w-full px-4 py-3 mt-1 text-sm bg-[#1F2937] text-gray-200 border border-gray-600 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             {errors.title && (
-              <span className="text-red-500 absolute bottom-[-25px] left-0">
-                {errors.title.message}
-              </span>
+              <span className="text-red-500 text-sm">{errors.title.message}</span>
             )}
-          </div>
+          </motion.div>
 
-          {/* description */}
-          <div className="relative mb-8 w-[80%]">
-            <label
-              htmlFor="description"
-              className="block text-sm font-medium text-gray-600"
-            >
+          {/* Task Description */}
+          <motion.div
+            className="relative w-full max-w-2xl"
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.3 }}
+          >
+            <label className="block text-sm font-medium text-gray-300">
               Task Description
             </label>
-            <input
-              type="text"
+            <textarea
               {...register("description", {
-                required: "description is required",
-                maxLength: {
-                  value: 200,
-                  message: "description cannot exceed 200 characters",
-                },
+                required: "Description is required",
+                maxLength: { value: 200, message: "Description cannot exceed 200 characters" },
               })}
-              aria-invalid={errors.description ? "true" : "false"}
+              rows="4"
               placeholder="Enter task description"
-              className="w-full px-4 py-2 mt-1 text-sm border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 text-gray-700"
+              className="w-full px-4 py-3 mt-1 text-sm bg-[#1F2937] text-gray-200 border border-gray-600 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             {errors.description && (
-              <span className="text-red-500 absolute bottom-[-25px] left-0">
-                {errors.description.message}
-              </span>
+              <span className="text-red-500 text-sm">{errors.description.message}</span>
             )}
-          </div>
+          </motion.div>
 
-          {/* category */}
-          <div className="relative mb-8 w-[80%]">
-            <label
-              htmlFor="category"
-              className="block text-sm font-medium text-gray-600"
-            >
-              Task category
+          {/* Task Category */}
+          <motion.div
+            className="relative w-full max-w-2xl"
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.4 }}
+          >
+            <label className="block text-sm font-medium text-gray-300">
+              Task Category
             </label>
             <select
-              id="category"
-              name="category"
-              className="block w-full mt-1 py-2 border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-              defaultValue="to-do"
               {...register("category", { required: "Category is required" })}
+              className="w-full px-4 py-3 mt-1 text-sm bg-[#1F2937] text-gray-200 border border-gray-600 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
               <option value="to-do">To-Do</option>
               <option value="in-progress">In Progress</option>
               <option value="done">Done</option>
             </select>
             {errors.category && (
-              <span className="text-red-500 absolute bottom-[-25px] left-0">
-                {errors.category.message}
-              </span>
+              <span className="text-red-500 text-sm">{errors.category.message}</span>
             )}
-          </div>
+          </motion.div>
 
-          <button
+          {/* Submit Button */}
+          <motion.button
             type="submit"
-            className="w-[80%] px-4 py-2 text-lg font-medium text-white bg-indigo-700 rounded-md hover:bg-indigo-800 cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-400"
+            className="w-full max-w-2xl py-3 mt-4 text-lg font-medium text-white bg-[#3B82F6] rounded-lg shadow-md hover:bg-[#2563EB] transition-transform transform hover:scale-105"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
           >
-            Edit Task
-          </button>
+            Save Changes
+          </motion.button>
         </form>
-      </div>
+      </motion.div>
     </dialog>
   );
 };
